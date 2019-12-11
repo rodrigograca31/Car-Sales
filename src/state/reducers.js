@@ -25,8 +25,10 @@ export function additionalPriceReducer(
 	action
 ) {
 	switch (action.type) {
-		case "something":
-			return additionalPrice;
+		case types.ADD_FEATURE:
+			return additionalPrice + 2;
+		case types.REMOVE_FEATURE:
+			return additionalPrice - action.payload.feature.price;
 		default:
 			return additionalPrice;
 	}
@@ -37,7 +39,16 @@ export function carReducer(car = initialState.car, action) {
 		case types.ADD_FEATURE:
 			return {
 				...car,
-				price: car.price + action.payload.feature.price
+				features: [...car.features, action.payload.feature]
+			};
+		case types.REMOVE_FEATURE:
+			return {
+				...car,
+				features: [
+					...car.features.filter(
+						feature => feature.id !== action.payload.feature.id
+					)
+				]
 			};
 		default:
 			return car;
