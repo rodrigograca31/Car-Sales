@@ -26,7 +26,7 @@ export function additionalPriceReducer(
 ) {
 	switch (action.type) {
 		case types.ADD_FEATURE:
-			return additionalPrice + 2;
+			return additionalPrice + action.payload.feature.price;
 		case types.REMOVE_FEATURE:
 			return additionalPrice - action.payload.feature.price;
 		default:
