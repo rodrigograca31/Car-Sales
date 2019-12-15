@@ -1,21 +1,30 @@
-import React from 'react';
-import AdditionalFeature from './AdditionalFeature';
+import React from "react";
+import AdditionalFeature from "./AdditionalFeature";
+import { connect } from "react-redux";
 
-const AdditionalFeatures = props => {
-  return (
-    <div className="content">
-      <h4>Additional Features</h4>
-      {props.additionalFeatures.length ? (
-        <ol type="1">
-          {props.additionalFeatures.map(item => (
-            <AdditionalFeature key={item.id} feature={item} />
-          ))}
-        </ol>
-      ) : (
-        <p>Nice looking car!</p>
-      )}
-    </div>
-  );
+const AdditionalFeatures = ({ additionalFeatures }) => {
+	return (
+		<div className="content">
+			<h4>Additional Features</h4>
+			{additionalFeatures.length ? (
+				<ol type="1">
+					{additionalFeatures.map(item => (
+						<AdditionalFeature key={item.id} feature={item} />
+					))}
+				</ol>
+			) : (
+				<p>Nice looking car!</p>
+			)}
+		</div>
+	);
 };
 
-export default AdditionalFeatures;
+// Step 8: Use "connect" to plug the component to redux
+
+function mapStatetoProps(state) {
+	return {
+		additionalFeatures: state.additionalFeatures
+	};
+}
+
+export default connect(mapStatetoProps, {})(AdditionalFeatures);
